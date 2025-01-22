@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: medical-clinic
-    env: python
-    region: ap-south-1
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn clinic_backend.wsgi
-    branch: main
