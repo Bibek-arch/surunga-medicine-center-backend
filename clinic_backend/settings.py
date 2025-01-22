@@ -27,8 +27,6 @@ SECRET_KEY = 'django-insecure-vhcq^-+1iy&7q)%z5d*m9c6+iy0lnq2s6!4s#i^fd#7!b6gnuu
 
 
 ALLOWED_HOSTS = ['*']
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEBUG = True
 # Application definition
 
@@ -129,6 +127,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # GRAPPELLI_ADMIN_TITLE = "Surunga Medicine Center Admin"
 
