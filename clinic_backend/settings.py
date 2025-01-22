@@ -58,11 +58,10 @@ MIDDLEWARE = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://surunga-medicine-center-frontend.vercel.app/"
-    'http://localhost:3001',  # React frontend URL
+    "https://surunga-medicine-center-frontend.vercel.app/"  # React frontend URL
 ]
 CORS_ALLOW_CREDENTIALS = True
 ROOT_URLCONF = 'clinic_backend.urls'
