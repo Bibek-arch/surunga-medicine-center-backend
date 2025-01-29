@@ -27,8 +27,14 @@ SECRET_KEY = 'django-insecure-vhcq^-+1iy&7q)%z5d*m9c6+iy0lnq2s6!4s#i^fd#7!b6gnuu
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-ALLOWED_HOSTS = ['*']
-DEBUG = True
+# ALLOWED_HOSTS = ['*']
+# DEBUG = True
+DEBUG = False
+ALLOWED_HOSTS = [
+    "surunga-medicine-center-backend.onrender.com",
+    "surungamedicine.com.np",
+    "localhost",
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -61,7 +67,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://surungamedicine.com.np", 
+    "https://surungamedicine.com.np",
+    "https://www.surungamedicine.com.np",  # In case you are using "www"
     "http://localhost:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
