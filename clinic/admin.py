@@ -17,7 +17,7 @@ class BlogAdmin(admin.ModelAdmin):
     
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'image')
+    list_display = ('title', 'description', 'icon', 'details', 'path')
 
 @admin.register(Doctor)
 class DoctorAdmin(admin.ModelAdmin):

@@ -61,7 +61,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://surunga-medicine-center-frontend.vercel.app/"  # React frontend URL
+    "https://surungamedicine.com.np", 
+    "http://localhost:3000",
 ]
 CORS_ALLOW_CREDENTIALS = True
 ROOT_URLCONF = 'clinic_backend.urls'

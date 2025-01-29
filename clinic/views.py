@@ -15,7 +15,7 @@ def get_banner(request):
 @api_view(['GET'])
 def get_services(request):
     services = Service.objects.all()
-    data = [{"title": service.title, "description": service.description, "image": request.build_absolute_uri(service.image.url)} for service in services]
+    data = [{"title": service.title, "description": service.description, "icon": service.icon, "details":service.details, "path": service.path } for service in services]
     return Response(data)
 
 @api_view(['GET'])

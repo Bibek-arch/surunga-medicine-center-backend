@@ -9,9 +9,16 @@ class Banner(models.Model):
         return self.caption
 
 class Service(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField(max_length=500)
-    image = models.ImageField(upload_to='services/')
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=50)
+    description = models.CharField(max_length=100)
+    icon = models.CharField(
+        max_length=50,
+        default='🩺', 
+        help_text="Enter the icon "
+    )
+    details = models.TextField(max_length=200, default='')
+    path = models.CharField(max_length=100, default='/services/')
 
     def __str__(self):
         return self.title
