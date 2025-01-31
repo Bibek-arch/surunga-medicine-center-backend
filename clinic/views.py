@@ -9,7 +9,7 @@ from .serializers import ContactSubmissionSerializer
 @api_view(['GET'])
 def get_banner(request):
     banners = Banner.objects.all()
-    data = [{"image": request.build_absolute_uri(banner.image.url), "caption": banner.caption} for banner in banners]
+    data = [{"image":banner.image.url, "caption": banner.caption} for banner in banners]
     return Response(data)
 
 @api_view(['GET'])
