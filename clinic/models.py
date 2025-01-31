@@ -77,7 +77,7 @@ import cloudinary.models
 
 # Create your models here.
 class Banner(models.Model):
-    image = cloudinary.models.CloudinaryField('image')
+    image = cloudinary.models.CloudinaryField('image', resource_type='image')
     caption = models.TextField(max_length=300)
 
     def __str__(self):
