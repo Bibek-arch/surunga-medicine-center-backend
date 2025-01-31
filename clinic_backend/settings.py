@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # 'grappelli',
     'cloudinary',  # Add this line
     'storages',  # Use 'storages' instead of 'cloudinary_storage'
+    'cloudinary_storage',  # Add this (not just 'storages')
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
