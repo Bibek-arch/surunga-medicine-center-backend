@@ -72,6 +72,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://surungamedicine.com.np",
     "https://www.surungamedicine.com.np",  # In case you are using "www"
     "http://localhost:3000",
+    "https://res.cloudinary.com"  # Add Cloudinary domain
+
 ]
 CORS_ALLOW_CREDENTIALS = True
 ROOT_URLCONF = 'clinic_backend.urls'
