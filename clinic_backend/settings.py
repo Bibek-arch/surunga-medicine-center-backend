@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'clinic',
     # 'grappelli',
+    'cloudinary',  # Add this line
+    'storages',  # Use 'storages' instead of 'cloudinary_storage'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -140,8 +142,21 @@ USE_TZ = True
 
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# import cloudinary
+# import cloudinary.uploader
+# import cloudinary.api
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dtua6mfji',
+#     'API_KEY': '768934758765893',
+#     'API_SECRET': '1j8UbbADhWEC0SdDiNh4X7YA2vY',
+# }
+
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # GRAPPELLI_ADMIN_TITLE = "Surunga Medicine Center Admin"
 
@@ -155,3 +170,16 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'your_email@gmail.com'
 EMAIL_HOST_PASSWORD = 'your_password'
+
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": "dtua6mfji",
+    "API_KEY": "768934758765893",
+    "API_SECRET": "1j8UbbADhWEC0SdDiNh4X7YA2vY"
+}
+
+DEFAULT_FILE_STORAGE = 'storages.backends.cloudinary.CloudinaryStorage'
