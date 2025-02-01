@@ -29,7 +29,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # ALLOWED_HOSTS = ['*']
 DEBUG = False
-# DEBUG = True
+#DEBUG = True
 ALLOWED_HOSTS = [
     "surunga-medicine-center-backend.onrender.com",
     "surungamedicine.com.np",
@@ -66,7 +66,7 @@ MIDDLEWARE = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "https://surungamedicine.com.np",
