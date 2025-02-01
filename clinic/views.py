@@ -27,12 +27,20 @@ def get_blogs(request):
 
 @api_view(['GET'])
 def get_doctors(request):
-    try:
-        doctors = Doctor.objects.all()
-        serializer = DoctorSerializer(doctors, many=True)
-        return Response(serializer.data)
-    except Exception as e:
-        return Response({"error": str(e)}, status=500)
+    doctors = Doctor.objects.all()
+    data = [
+        {
+            "name": doctor.name,
+            "specialty": doctor.specialty,
+            "days": doctor.days,
+            "time": doctor.time,
+            "details": doctor.details,
+            "image_url": doctor.image.url if doctor.image else None,
+        }
+        for doctor in doctors
+    ]
+    return Response(data)
+
 # @api_view(['GET'])
 # def get_doctors(request):
 #     doctors = Doctor.objects.all()
