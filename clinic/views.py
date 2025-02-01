@@ -5,7 +5,6 @@ from .models import Banner, Service, Doctor, ContactSubmission, Blog
 from rest_framework.views import APIView
 from rest_framework import status
 from .serializers import ContactSubmissionSerializer
-from .serializers import DoctorSerializer
 
 @api_view(['GET'])
 def get_banner(request):
@@ -28,24 +27,8 @@ def get_blogs(request):
 @api_view(['GET'])
 def get_doctors(request):
     doctors = Doctor.objects.all()
-    data = [
-        {
-            "name": doctor.name,
-            "specialty": doctor.specialty,
-            "days": doctor.days,
-            "time": doctor.time,
-            "details": doctor.details,
-            "image_url": doctor.image.url if doctor.image else None,
-        }
-        for doctor in doctors
-    ]
+    data = [{"name": doctor.name, "specialty": doctor.specialty, "days":doctor.days, "time":doctor.time, "details": doctor.details, "image": request.build_absolute_uri(doctor.image.url)} for doctor in doctors]
     return Response(data)
-
-# @api_view(['GET'])
-# def get_doctors(request):
-#     doctors = Doctor.objects.all()
-#     data = [{"name": doctor.name, "specialty": doctor.specialty, "days":doctor.days, "time":doctor.time, "details": doctor.details, "image": request.build_absolute_uri(doctor.image.url)} for doctor in doctors]
-#     return Response(data)
 
 class ContactSubmissionAPIView(APIView):
     def get(self, request):

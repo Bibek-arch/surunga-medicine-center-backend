@@ -11,19 +11,10 @@ class ServiceSerializer(serializers.ModelSerializer):
         model = Service
         fields = '__all__'
 
-# class DoctorSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Doctor
-#         fields = '__all__'
 class DoctorSerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField()
-
     class Meta:
         model = Doctor
-        fields = ['id', 'name', 'specialty', 'days', 'time', 'details', 'image_url']
-
-    def get_image_url(self, obj):
-        return obj.image.url if obj.image else None
+        fields = '__all__'
 
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
