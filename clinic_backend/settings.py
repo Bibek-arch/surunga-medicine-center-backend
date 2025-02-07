@@ -27,14 +27,14 @@ SECRET_KEY = 'django-insecure-vhcq^-+1iy&7q)%z5d*m9c6+iy0lnq2s6!4s#i^fd#7!b6gnuu
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# ALLOWED_HOSTS = ['*']
-DEBUG = False
+ALLOWED_HOSTS = ['*']
+DEBUG = True
 #DEBUG = True
-ALLOWED_HOSTS = [
-    "surunga-medicine-center-backend.onrender.com",
-    "surungamedicine.com.np",
-    "localhost",
-]
+# ALLOWED_HOSTS = [
+#     "surunga-medicine-center-backend.onrender.com",
+#     "surungamedicine.com.np",
+#     "localhost",
+# ]
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'clinic',
     # 'grappelli',
-    'cloudinary',  # Add this line
-    'storages',  # Use 'storages' instead of 'cloudinary_storage'  # Add this (not just 'storages')
+    # 'cloudinary',  # Add this line
+    # 'storages',  # Use 'storages' instead of 'cloudinary_storage'  # Add this (not just 'storages')
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,26 +66,27 @@ MIDDLEWARE = [
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
+    "https://res.cloudinary.com",  # Allow Cloudinary
     "https://surungamedicine.com.np",
     "https://www.surungamedicine.com.np",  # In case you are using "www"
     "http://localhost:3000",
-    "https://res.cloudinary.com"  # Add Cloudinary domain
+    # "https://res.cloudinary.com"  # Add Cloudinary domain
 
 ]
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = [
-    "content-type",
-    "authorization",
-    "x-requested-with",
-    "accept",
-    "origin",
-    "user-agent",
-    "cache-control",
-    "x-csrf-token",
-]
+# CORS_ALLOW_HEADERS = [
+#     "content-type",
+#     "authorization",
+#     "x-requested-with",
+#     "accept",
+#     "origin",
+#     "user-agent",
+#     "cache-control",
+#     "x-csrf-token",
+# ]
 ROOT_URLCONF = 'clinic_backend.urls'
 
 TEMPLATES = [
@@ -155,7 +156,7 @@ USE_TZ = True
 
 
 MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # import cloudinary
@@ -184,24 +185,43 @@ EMAIL_HOST_USER = 'your_email@gmail.com'
 EMAIL_HOST_PASSWORD = 'your_password'
 
 
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
+from decouple import config
 
 CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": "dtua6mfji",
-    "API_KEY": "768934758765893",
-    "API_SECRET": "1j8UbbADhWEC0SdDiNh4X7YA2vY"
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
 }
 
-DEFAULT_FILE_STORAGE = 'storages.backends.cloudinary.CloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+import cloudinary
 
+cloudinary.config(
+    cloud_name = config('CLOUDINARY_CLOUD_NAME'),
+    api_key =  config('CLOUDINARY_API_KEY'),
+    api_secret = config('CLOUDINARY_API_SECRET'),
+)
+# print("Cloud Name:",cloudinary.config().cloud_name)
+# print("Api Key:",cloudinary.config().api_key)
+# print("Api Secret:",cloudinary.config().api_secret)
+
+# import cloudinary
+# import cloudinary.uploader
+# import cloudinary.api
+
+# CLOUDINARY_STORAGE = {
+#     "CLOUD_NAME": "dtua6mfji",
+#     "API_KEY": "768934758765893",
+#     "API_SECRET": "1j8UbbADhWEC0SdDiNh4X7YA2vY"
+# }
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.cloudinary.CloudinaryStorage'
 
 
 
 
 # # new updated
-
 # from pathlib import Path
 # import os
 # import cloudinary

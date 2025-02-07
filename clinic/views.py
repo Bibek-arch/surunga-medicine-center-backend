@@ -24,11 +24,24 @@ def get_blogs(request):
     data = [{"title": blog.title,"content": blog.content, "published_date":blog.published_date, "image": request.build_absolute_uri(blog.image.url)} for blog in blogs]
     return Response(data)
 
+# @api_view(['GET'])
+# def get_doctors(request):
+#     doctors = Doctor.objects.all()
+#     data = [{"name": doctor.name, "specialty": doctor.specialty, "days":doctor.days, "time":doctor.time, "details": doctor.details, "image": request.build_absolute_uri(doctor.image.url)} for doctor in doctors]
+#     return Response(data)
+
+# views.py
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Doctor
+from .serializers import DoctorSerializer
+
 @api_view(['GET'])
 def get_doctors(request):
     doctors = Doctor.objects.all()
-    data = [{"name": doctor.name, "specialty": doctor.specialty, "days":doctor.days, "time":doctor.time, "details": doctor.details, "image": request.build_absolute_uri(doctor.image.url)} for doctor in doctors]
-    return Response(data)
+    serializer = DoctorSerializer(doctors, many=True, context={'request': request})
+    return Response(serializer.data)
+
 
 class ContactSubmissionAPIView(APIView):
     def get(self, request):
@@ -53,3 +66,51 @@ class ContactChoicesAPIView(APIView):
             for choice in ContactSubmission.ChoiceOptions.choices
         ]
         return Response(choices, status=200)
+
+
+# from rest_framework.decorators import api_view
+# from rest_framework.response import Response
+# from .models import Banner, Doctor, Blog
+
+# @api_view(['GET'])
+# def get_banner(request):
+#     banners = Banner.objects.all()
+#     data = [{"image": banner.image.url if banner.image else "", "caption": banner.caption} for banner in banners]
+#     return Response(data)
+# import cloudinary.uploader
+# from rest_framework.decorators import api_view
+# from rest_framework.response import Response
+# from rest_framework import status
+# from .models import Blog
+# from .serializers import BlogSerializer
+# from django.conf import settings
+
+# @api_view(['GET'])
+# def get_blogs(request):
+#     blogs = Blog.objects.all()
+#     serializer = BlogSerializer(blogs, many=True)
+#     return Response(serializer.data, status=status.HTTP_200_OK)
+
+# @api_view(['POST'])
+# def create_blog(request):
+#     serializer = BlogSerializer(data=request.data)
+#     if serializer.is_valid():
+#         # Handle image upload to Cloudinary
+#         image = request.FILES.get('image')
+#         if image:
+#             # Upload image to Cloudinary
+#             result = cloudinary.uploader.upload(image)
+#             # Set the image URL from Cloudinary to the Blog model
+#             serializer.validated_data['image'] = result['secure_url']
+        
+#         # Save the blog post with the image URL
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# @api_view(['GET'])
+# def get_doctors(request):
+#     doctors = Doctor.objects.all()
+#     data = [{"name": doctor.name, "specialty": doctor.specialty, "days": doctor.days, "time": doctor.time, "details": doctor.details, "image": doctor.image.url} for doctor in doctors]
+#     return Response(data)
+
