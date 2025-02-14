@@ -116,17 +116,38 @@ WSGI_APPLICATION = 'clinic_backend.wsgi.application'
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',  # Supabase default DB name
+#         'USER': 'postgres',
+#         'PASSWORD': 'surunga123',
+#         'HOST': 'db.wkgquanhuhbrllticpbv.supabase.co',  # Supabase host
+#         'PORT': '5432',
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'clinic',
+#         'PASSWORD': 'surunga123',
+#         'HOST': 'aws-0-ap-southeast-1.pooler.supabase.com',  # Use Transaction Pooler host
+#         'PORT': '6543',  # Use Transaction Pooler port
+#     }
+# }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  # Supabase default DB name
-        'USER': 'postgres',
-        'PASSWORD': 'surunga123',
-        'HOST': 'db.wkgquanhuhbrllticpbv.supabase.co',  # Supabase host
-        'PORT': '5432',
+        'NAME': 'postgres',  # Database name (always "postgres" in Supabase)
+        'USER': 'postgres.wkgquanhuhbrllticpbv',  # Extracted from the connection string
+        'PASSWORD': 'surunga123',  # Replace with your actual password
+        'HOST': 'aws-0-ap-southeast-1.pooler.supabase.com',  # Transaction Pooler host
+        'PORT': '6543',  # Transaction Pooler port
     }
 }
-
 
 
 
