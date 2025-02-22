@@ -67,6 +67,18 @@ class ContactChoicesAPIView(APIView):
         ]
         return Response(choices, status=200)
 
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from .models import Blog
+
+def get_blog_metadata(request, post_id):
+    post = get_object_or_404(Blog, id=post_id)
+    return JsonResponse({
+        "title": post.title,
+        "content": post.content,
+        "image": request.build_absolute_uri(post.image.url),
+        "url": f"https://surungamedicine.com.np/blog/{post.id}"
+    })
 
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
