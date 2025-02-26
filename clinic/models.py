@@ -54,6 +54,7 @@ class Doctor(models.Model):
     
 
 class Blog(models.Model):
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     content = models.TextField(max_length=500)
     published_date = models.DateField(auto_now_add=True)
