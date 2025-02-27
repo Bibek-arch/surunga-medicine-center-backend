@@ -17,6 +17,12 @@ def get_services(request):
     services = Service.objects.all()
     data = [{"title": service.title, "description": service.description, "icon": service.icon, "details":service.details, "path": service.path } for service in services]
     return Response(data)
+from django.http import JsonResponse
+from .models import Blog
+
+def blog_detail(request, pk):
+    blog_post = get_object_or_404(Blog, pk=pk)
+    return render(request, 'templates/blog/blog_detail.html', {'blog_post': blog_post})
 
 @api_view(['GET'])
 def get_blogs(request):
@@ -79,23 +85,30 @@ class ContactChoicesAPIView(APIView):
 #         "image": request.build_absolute_uri(post.image.url),
 #         "url": f"https://surungamedicine.com.np/blog/{post.id}"
 #     })
+# from django.shortcuts import render, get_object_or_404
+# from .models import Blog # Assuming you have a BlogPost model
+
+# def blog_post_detail(request, slug):
+#     # Fetch the blog post using the slug
+#     blog_post = get_object_or_404(Blog, slug=slug)
+
+#     # Prepare meta tags for the blog post
+#     meta_tags = {
+#         "title": blog_post.title,
+#         "description": blog_post.content[:150],  # First 150 characters of the content
+#         "image": blog_post.image.url if blog_post.image else "/static/placeholder.svg",
+#         "url": request.build_absolute_uri(),
+#     }
+
+#     # Render the index.html template with the meta tags
+#     return render(request, "index.html", {"meta_tags": meta_tags})
+
 from django.shortcuts import render, get_object_or_404
-from .models import Blog # Assuming you have a BlogPost model
+from .models import Blog
 
-def blog_post_detail(request, slug):
-    # Fetch the blog post using the slug
-    blog_post = get_object_or_404(Blog, slug=slug)
-
-    # Prepare meta tags for the blog post
-    meta_tags = {
-        "title": blog_post.title,
-        "description": blog_post.content[:150],  # First 150 characters of the content
-        "image": blog_post.image.url if blog_post.image else "/static/placeholder.svg",
-        "url": request.build_absolute_uri(),
-    }
-
-    # Render the index.html template with the meta tags
-    return render(request, "index.html", {"meta_tags": meta_tags})
+def blog_detail(request, pk):
+    blog_post = get_object_or_404(Blog, pk=pk)
+    return render(request, 'blog/blog_detail.html', {'blog_post': blog_post})
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
 # from .models import Banner, Doctor, Blog
