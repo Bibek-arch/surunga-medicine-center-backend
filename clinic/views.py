@@ -27,7 +27,7 @@ def blog_detail(request, pk):
 @api_view(['GET'])
 def get_blogs(request):
     blogs = Blog.objects.all()
-    data = [{"title": blog.title,"content": blog.content, "published_date":blog.published_date, "image": request.build_absolute_uri(blog.image.url)} for blog in blogs]
+    data = [{"title": blog.title,"slug":blog.slug,"content": blog.content, "published_date":blog.published_date, "image": request.build_absolute_uri(blog.image.url)} for blog in blogs]
     return Response(data)
 
 # @api_view(['GET'])
@@ -112,6 +112,35 @@ def blog_detail(request, pk):
 # from rest_framework.decorators import api_view
 # from rest_framework.response import Response
 # from .models import Banner, Doctor, Blog
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from .models import Blog
+
+def blog_meta_view(request, slug):
+    blog = get_object_or_404(Blog, slug=slug)
+    
+    meta_tags = f"""
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{blog.title}</title>
+        <meta property="og:title" content="{blog.title}" />
+        <meta property="og:description" content="{blog.content[:150]}" />
+        <meta property="og:image" content="{blog.image.url if blog.image else 'https://surungamedicine.com.np/default-image.jpg'}" />
+        <meta property="og:url" content="https://surungamedicine.com.np/blog/{blog.slug}" />
+        <meta property="og:type" content="article" />
+        <script>
+            window.location.href = "https://surungamedicine.com.np/blog/{blog.slug}";
+        </script>
+    </head>
+    <body>
+    </body>
+    </html>
+    """
+    
+    return HttpResponse(meta_tags)
 
 # @api_view(['GET'])
 # def get_banner(request):

@@ -57,6 +57,7 @@ class Blog(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     content = models.TextField(max_length=500)
+    slug = models.SlugField(max_length=20,null=True, blank=True)
     published_date = models.DateField(auto_now_add=True)
     image = CloudinaryField('image')
 
