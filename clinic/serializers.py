@@ -11,10 +11,6 @@ class ServiceSerializer(serializers.ModelSerializer):
         model = Service
         fields = '__all__'
 
-# class DoctorSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Doctor
-#         fields = '__all__'
 class DoctorSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
 
