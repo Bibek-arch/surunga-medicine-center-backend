@@ -138,16 +138,45 @@ WSGI_APPLICATION = 'clinic_backend.wsgi.application'
 # }
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',  # Database name (always "postgres" in Supabase)
+#         'USER': 'postgres.wkgquanhuhbrllticpbv',  # Extracted from the connection string
+#         'PASSWORD': 'surunga123',  # Replace with your actual password
+#         'HOST': 'aws-0-ap-southeast-1.pooler.supabase.com',  # Transaction Pooler host
+#         'PORT': '6543',  # Transaction Pooler port
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'your_mysql_db',
+#         'USER': 'your_mysql_user',
+#         'PASSWORD': 'your_mysql_password',
+#         'HOST': 'localhost',  # Change if using a remote MySQL server
+#         'PORT': '3306',
+#         'OPTIONS': {
+#             'charset': 'utf8mb4',  # Supports emojis & special characters
+#         }
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  # Database name (always "postgres" in Supabase)
-        'USER': 'postgres.wkgquanhuhbrllticpbv',  # Extracted from the connection string
-        'PASSWORD': 'surunga123',  # Replace with your actual password
-        'HOST': 'aws-0-ap-southeast-1.pooler.supabase.com',  # Transaction Pooler host
-        'PORT': '6543',  # Transaction Pooler port
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'surunga_medicine_db',  # तिम्रो MySQL Database नाम
+        'USER': 'surunga',  # MySQL Username
+        'PASSWORD': 'Surunga@123',  # MySQL Password
+        'HOST': 's805.bom1.mysecurecloudhost.com',  # Remote database भए, cPanel मा देखिएको Hostname राख
+        'PORT': '3306',  # MySQL को Default Port
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
+
+
 
 
 
